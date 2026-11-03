@@ -24,6 +24,7 @@ if os.path.exists(p):
     data = json.load(open(p, encoding="utf-8"))
     if isinstance(data, dict):
         data = []
+WORDS = [w for w in WORDS if not any(w in x.get("w", "") for x in data[:40])] or WORDS
 data.insert(0, {"t": now.strftime("%Y-%m-%d %H:%M"), "w": random.choice(WORDS)})
 data = data[:200]
 with open(p, "w", encoding="utf-8") as f:
